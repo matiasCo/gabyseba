@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fiesta 10 Años de Casados - Seba & Gaby</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: "Georgia", serif;
+      background: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+      border-radius: 20px;
+      padding: 60px 50px;
+      text-align: center;
+      max-width: 900px;
+      width: 90%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      backdrop-filter: blur(6px);
+    }
+
+    h1 {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 4rem;
+      margin-bottom: 30px;
+      color: #e11d48;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-top: 10px;
+      color: #333;
+    }
+
+    .couple-photo {
+      margin: 30px 0;
+      border-radius: 50%;
+      width: 400px;
+      height: 400px;
+      object-fit: cover;
+      border: 5px solid #e11d48;
+    }
+
+    input {
+      padding: 20px;
+      font-size: 1.5rem;
+      width: 100%;
+      margin-bottom: 30px;
+      border-radius: 12px;
+      border: 2px solid #ccc;
+      background-color: #f7f7f7;
+    }
+
+    button {
+      padding: 20px 40px;
+      font-size: 1.8rem;
+      background-color: #e11d48;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #be123c;
+    }
+
+    .result {
+      margin-top: 30px;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #1e293b;
+      text-shadow: none;
+    }
+
+    @media (max-width: 1024px) {
+      h1 { font-size: 3rem; }
+      h2 { font-size: 1.5rem; }
+      .result { font-size: 1.8rem; }
+      input, button { font-size: 1.4rem; padding: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="main">
+    <h1>¡Celebrando 10 años de amor!</h1>
+    <h2>Seba & Gaby</h2>
+    <img src="img.jpg" alt="Foto de Seba y Gaby" class="couple-photo">
+    <p>¿Dónde te sientas en nuestra fiesta?</p>
+    <input type="text" id="nameInput" placeholder="Escribí tu nombre completo" aria-label="Nombre completo">
+    <button onclick="searchTable()">Buscar mesa</button>
+    <div class="result" id="result" aria-live="polite"></div>
+  </div>
+
+  <!-- Confetti JS -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    const guestList = {
+      "juan perez": 1,
+      "maria lopez": 1,
+      "carlos ramirez": 2,
+      "ana fernandez": 2,
+      "pedro gomez": 3,
+      "lucia martinez": 3,
+      "jorge rodriguez": 4,
+      "camila torres": 4,
+      "sofia silva": 5,
+      "martin ruiz": 5,
+      "valentina diaz": 6,
+      "marcos aguilar": 6,
+      "julieta mendes": 7,
+      "franco ledesma": 7,
+      "lorena sosa": 8,
+      "ramiro escobar": 8,
+      "florencia vidal": 9,
+      "matias benitez": 9,
+      "carla mendez": 10,
+      "diego rojas": 10,
+      "noelia franco": 11,
+      "gonzalo paz": 11,
+      "catalina bravo": 12,
+      "emiliano lopez": 12,
+      "caro rios": 13
+    };
+
+    const input = document.getElementById("nameInput");
+    const resultDiv = document.getElementById("result");
+
+    // Autofocus
+    window.onload = () => {
+      input.focus();
+    };
+
+    // Enter para buscar
+    input.addEventListener("keypress", function (event) {
+      if (event.key === "Enter") {
+        searchTable();
+      }
+    });
+
+    function searchTable() {
+      const name = input.value.trim().toLowerCase();
+      if (guestList.hasOwnProperty(name)) {
+        const formattedName = capitalize(name);
+        const mesa = guestList[name];
+        resultDiv.textContent = `🎉 ${formattedName} está en la mesa ${mesa}`;
+        launchConfetti();
+      } else {
+        resultDiv.textContent = "❌ Nombre no encontrado. Revisá la ortografía.";
+      }
+    }
+
+    function capitalize(str) {
+      return str.split(" ").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+    }
+
+    function launchConfetti() {
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }
+  </script>
+</body>
+</html>
