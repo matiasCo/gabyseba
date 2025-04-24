@@ -31,6 +31,15 @@
       backdrop-filter: blur(6px);
     }
 
+    p {
+      font-size: 2.2rem; /* Aumenta el tamaño del texto */
+      font-weight: bold; /* Haz el texto más destacado */
+      color: #e11d48; /* Un color llamativo */
+      margin-top: 20px; /* Espacio encima */
+      margin-bottom: 30px; /* Espacio debajo */
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.6); /* Agrega sombra para mejorar la legibilidad */
+    }
+
     h1 {
       font-family: 'Brush Script MT', cursive;
       font-size: 4rem;
@@ -80,18 +89,62 @@
     }
 
     .result {
-      margin-top: 30px;
-      font-size: 2rem;
-      font-weight: bold;
-      color: #1e293b;
+      margin-top: 40px;
+      padding: 30px;
+      background-color: #fef3c7;
+      border: 2px solid #fcd34d;
+      border-radius: 20px;
+      font-size: 1.6rem;
+      color: #92400e;
       text-shadow: none;
+      font-weight: 500;
+      display: none;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .mesa-circle {
+      width: 120px;
+      height: 120px;
+      background-color: #facc15;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      font-weight: bold;
+      color: #1f2937;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .not-found {
+      color: #dc2626;
+      font-size: 1.4rem;
+      background-color: #fee2e2;
+      border: 1px solid #fca5a5;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    input {
+      padding: 20px;
+      font-size: 1.5rem;
+      width: 100%; /* Esto hace que ocupe el 100% del contenedor */
+      max-width: 500px; /* Añadir un máximo para que no se estire demasiado */
+      margin: 0 auto; /* Esto centra el input */
+      display: block; /* Asegura que sea un bloque, para que funcione el centrado */
+      margin-bottom: 30px;
+      border-radius: 12px;
+      border: 2px solid #ccc;
+      background-color: #f7f7f7;
     }
 
     @media (max-width: 1024px) {
       h1 { font-size: 3rem; }
       h2 { font-size: 1.5rem; }
-      .result { font-size: 1.8rem; }
       input, button { font-size: 1.4rem; padding: 15px; }
+      .mesa-circle { width: 90px; height: 90px; font-size: 2rem; }
     }
   </style>
 </head>
@@ -103,66 +156,245 @@
     <p>¿Dónde te sientas en nuestra fiesta?</p>
     <input type="text" id="nameInput" placeholder="Escribí tu nombre completo" aria-label="Nombre completo">
     <button onclick="searchTable()">Buscar mesa</button>
-    <div class="result" id="result" aria-live="polite"></div>
+    <div id="result" class="result" aria-live="polite"></div>
   </div>
 
   <!-- Confetti JS -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
     const guestList = {
-      "juan perez": 1,
-      "maria lopez": 1,
-      "carlos ramirez": 2,
-      "ana fernandez": 2,
-      "pedro gomez": 3,
-      "lucia martinez": 3,
-      "jorge rodriguez": 4,
-      "camila torres": 4,
-      "sofia silva": 5,
-      "martin ruiz": 5,
-      "valentina diaz": 6,
-      "marcos aguilar": 6,
-      "julieta mendes": 7,
-      "franco ledesma": 7,
-      "lorena sosa": 8,
-      "ramiro escobar": 8,
-      "florencia vidal": 9,
-      "matias benitez": 9,
-      "carla mendez": 10,
-      "diego rojas": 10,
-      "noelia franco": 11,
-      "gonzalo paz": 11,
-      "catalina bravo": 12,
-      "emiliano lopez": 12,
-      "caro rios": 13
+      "adriana": 1,
+      "elba": 1,
+      "leli": 1,
+      "gabriela": 1,
+      "giovana": 1,
+      "juan henderson": 1,
+      "luis": 1,
+      "matias": 1,
+      "patricia": 1,
+      "sebastian": 1,
+      "zully": 1,
+      "alejandra": 2,
+      "daiana": 2,
+      "karina": 2,
+      "laura aires": 2,
+      "mariana": 2,
+      "oriana": 2,
+      "belen": 3,
+      "diego": 3,
+      "gaston": 3,
+      "guillermo": 3,
+      "paula": 3,
+      "rafael": 3,
+      "chichi": 4,
+      "doty": 4,
+      "ester": 4,
+      "maría blanco": 4,
+      "monica da rosa": 4,
+      "rita": 4,
+      "nery": 4,
+      "rossana": 4,
+      "cecilia": 5,
+      "emilia": 5,
+      "graciela": 5,
+      "julia": 5,
+      "laura hernandes": 5,
+      "lourdes": 5,
+      "viviana": 5,
+      "clarisa": 6,
+      "claudia": 6,
+      "ignacio": 6,
+      "julio alberti": 6,
+      "marcia": 6,
+      "federico": 6,
+      "rodrigo andrade": 6,
+      "aldo": 7,
+      "carlos": 7,
+      "eduardo": 7,
+      "maría inés odella": 7,
+      "santiago": 7,
+      "wiliams": 7,
+      "yudith": 7,
+      "andrés": 8,
+      "baldo": 8,
+      "enrique": 8,
+      "gabriel": 8,
+      "martín": 8,
+      "tano": 8,
+      "stefano": 8,
+      "celia": 9,
+      "juan abal": 9,
+      "julio lacourdelle": 9,
+      "leandro rosas": 9,
+      "lilo": 9,
+      "rodrigo piloni": 9,
+      "ernesto": 10,
+      "florencia": 10,
+      "florencia": 10,
+      "héctor": 10,
+      "jholena": 10,
+      "leandro bustos": 10,
+      "cristina": 11,
+      "gustavo": 11,
+      "hugo": 11,
+      "mónica ibero": 11,
+      "rodrigo milán": 11,
+      "agustina": 12,
+      "ana clara": 12,
+      "pedro": 12,
+      "geovanna": 12,
+      "gimena": 12,
+      "magdalena": 12,
+    };
+
+    const guestMsgs = {
+      "adriana": "Eso es el destino",
+      "elba": "Mesa de la sabiduría",
+      "leli": "Mesa de la sabiduría",
+      "gabriela": "El amor proveerá",
+      "giovana": "Te olvidaste de tus hijas",
+      "juan henderson": "Traidor",
+      "luis": "No sabeeeee",
+      "matias": "El mejor",
+      "patricia": "Siempre lista",
+      "sebastian": "El peladito",
+      "zully": "Tengo calor",
+      "alejandra": "",
+      "daiana": "",
+      "karina": "",
+      "laura aires": "",
+      "mariana": "",
+      "oriana": "",
+      "belen": "",
+      "diego": "",
+      "gaston": "Bolsilludo",
+      "guillermo": "Bolsilludo",
+      "paula": "",
+      "rafael": "",
+      "chichi": "",
+      "doty": "",
+      "ester": "",
+      "maría blanco": "",
+      "monica da rosa": "Qué amor!",
+      "rita": "Licenciada",
+      "nery": "",
+      "rossana": "",
+      "cecilia": "",
+      "emilia": "",
+      "graciela": "",
+      "julia": "",
+      "laura hernandes": "",
+      "lourdes": "",
+      "viviana": "",
+      "clarisa": "",
+      "claudia": "",
+      "ignacio": "Toy pa todas",
+      "julio alberti": "",
+      "marcia": "",
+      "federico": "",
+      "rodrigo andrade": "Tenemos articulos de Tiwaz a la venta",
+      "aldo": "",
+      "carlos": "",
+      "eduardo": "",
+      "maría inés odella": "",
+      "santiago": "",
+      "wiliams": "",
+      "yudith": "",
+      "andrés": "",
+      "baldo": "",
+      "enrique": "Tratame el conducto",
+      "gabriel": "Cartero del amor",
+      "martín": "",
+      "tano": "",
+      "stefano": "",
+      "celia": "",
+      "juan abal": "",
+      "julio lacourdelle": "",
+      "leandro rosas": "",
+      "lilo": "",
+      "rodrigo piloni": "",
+      "ernesto": "",
+      "florencia": "",
+      "florencia": "",
+      "héctor": "",
+      "jholena": "",
+      "leandro bustos": "",
+      "cristina": "",
+      "gustavo": "",
+      "hugo": "",
+      "mónica ibero": "",
+      "rodrigo milán": "",
+      "agustina": "",
+      "ana clara": "",
+      "pedro": "La casa necesita una mano",
+      "geovanna": "Necesitamos una moza",
+      "gimena": "",
+      "magdalena": ""
     };
 
     const input = document.getElementById("nameInput");
     const resultDiv = document.getElementById("result");
 
-    // Autofocus
     window.onload = () => {
       input.focus();
     };
 
-    // Enter para buscar
     input.addEventListener("keypress", function (event) {
       if (event.key === "Enter") {
         searchTable();
       }
     });
 
+    function normalize(str) {
+      return str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "").replace(/ /g, "")
+        .toLowerCase()
+        .trim();
+    }
+
     function searchTable() {
-      const name = input.value.trim().toLowerCase();
-      if (guestList.hasOwnProperty(name)) {
-        const formattedName = capitalize(name);
-        const mesa = guestList[name];
-        resultDiv.textContent = `🎉 ${formattedName} está en la mesa ${mesa}`;
+      const inputName = normalize(input.value);
+      resultDiv.style.display = "flex";
+      let found = null;
+
+      for (const guest in guestList) {
+        const normalizedGuest = normalize(guest);
+
+        // CASO 1: Si el nombre registrado es solo una palabra (sin apellido)
+        if (!normalizedGuest.includes(" ")) {
+          // Si el input empieza por ese nombre (para permitir "sebastian pirulo")
+          if (
+            inputName === normalizedGuest ||
+            inputName.startsWith(normalizedGuest + " ")
+          ) {
+            found = guest;
+            break;
+          }
+        } else {
+          // CASO 2: El nombre tiene apellido → debe coincidir exactamente
+          if (inputName === normalizedGuest) {
+            found = guest;
+            break;
+          }
+        }
+      }
+
+      if (found) {
+        const formattedName = capitalize(found);
+        const mesa = guestList[found];
+        const msg = guestMsgs[found];
+        resultDiv.innerHTML = `
+          <div>🎉 ${formattedName}, estás en la mesa:</div>
+          <div class="mesa-circle">${mesa}</div>
+          <div>${msg}</div>
+        `;
         launchConfetti();
       } else {
-        resultDiv.textContent = "❌ Nombre no encontrado. Revisá la ortografía.";
+        resultDiv.innerHTML = `<div class="not-found">❌ Nombre no encontrado. Revisá la ortografía o consultá a Seba & Gaby.</div>`;
       }
     }
+
 
     function capitalize(str) {
       return str.split(" ").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
